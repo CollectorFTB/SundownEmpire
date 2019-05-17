@@ -15,6 +15,9 @@ class Planet:
     def __init__(self, planet_data):
         self.name, self.resource, self.influence, self.planet_type, self.planet_tech = parse_planet_data(planet_data)
 
+class Anomaly(Planet):
+    pass
+
 class System:
     def __init__(self, planet_names):
         self.planets = [get_planet(planet_name) for planet_name in planet_names]
