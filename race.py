@@ -22,17 +22,23 @@ def parse_race_data(race_data):
 def print_race_data(race):
     print('Race name:\n\t', race.name)
     print('Techs:\n\t', ', '.join(race.technologies))
-    print('Starting planets:\n\t', '\n\t '.join(race.home_planets))
+    print('Starting planets:\n\t', '\n\t '.join([planet.name for planet in race.home_planets]))
     print('Units:', )
     for unit in race.units:
         print('\t', unit, ':',race.units[unit])
+    print('Commodities:\n\t', race.commodities)
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
 
 class Race:
     def __init__(self, race_data):
-        self.name, self.technologies, self.units, planet_names, self.commodities = parse_race_data(race_data)
-        self.home_planets = [planet.get_planet(planet_name) for planet_name in planet_names]
+        self.name, self.technologies, self.units, home_planets, self.commodities = parse_race_data(race_data)
+        self.home_planets = [planet.Planet(planet_data) for planet_data in home_planets]
 
 
 RACES = [Race(race_info) for race_info in utils.get_data_file(RACES_PATH).items()]
 random.shuffle(RACES)
+
+if __name__ == "__main__":
+    for race in RACES:
+        print_race_data(race)
+
