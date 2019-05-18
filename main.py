@@ -1,5 +1,4 @@
 import sundown_empire
-import json
     
 def main():
     sundown_empire.SundownEmpire(4)
