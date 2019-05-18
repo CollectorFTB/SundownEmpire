@@ -1,3 +1,4 @@
+import random
 import utils 
 
 PLANETS_PATH = 'planets.json'
@@ -28,7 +29,15 @@ PLANETS = [Planet(planet_data) for planet_data in utils.get_data_file(PLANETS_PA
 ANOMALIES = [Anomaly(anomaly_name) for anomaly_name in utils.get_data_file(ANOMALIES_PATH)]
 SYSTEMS = [System(planet_names) for planet_names in utils.get_data_file(SYSTEMS_PATH)]
 
+random.shuffle(PLANETS)
+random.shuffle(ANOMALIES)
+random.shuffle(SYSTEMS)
+
+
 if __name__ == '__main__':
     print('Systems:', len(SYSTEMS))
     print('Anomalies:', len(ANOMALIES))
+    for planet in PLANETS:
+        if (planet.planet_type, planet.planet_tech) == (None, None):
+            print(planet.name, planet.planet_type, planet.planet_tech)
     # print('')
